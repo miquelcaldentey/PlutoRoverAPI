@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using PlutoRoverAPI.Infrastructure.PubSub;
 using PlutoRoverAPI.Models.Common;
 using PlutoRoverAPI.Services.Movements.Interfaces;
 
@@ -8,11 +9,16 @@ public class MoveServiceLoggerDecorator : IMoveService
 {
     private readonly IMoveService _inner;
     private readonly ILogger<MoveServiceLoggerDecorator> _logger;
+    private readonly IPubSub _pubSub;
 
-    public MoveServiceLoggerDecorator(IMoveService inner, ILogger<MoveServiceLoggerDecorator> logger)
+    public MoveServiceLoggerDecorator(
+        IMoveService inner, 
+        ILogger<MoveServiceLoggerDecorator> logger,
+        IPubSub pubSub)
     {
         this._inner = inner;
         this._logger = logger;
+        this._pubSub = pubSub;
     }
 
     public Position Move(string movements)
@@ -37,7 +43,7 @@ public class MoveServiceLoggerDecorator : IMoveService
     private void LogInformation(object request, string text)
     {
         var rqSerialized = Serialize(request);
-        //PubSub Log
+        _pubSub.Publish();
 
         _logger.LogInformation(text, rqSerialized);
     }
