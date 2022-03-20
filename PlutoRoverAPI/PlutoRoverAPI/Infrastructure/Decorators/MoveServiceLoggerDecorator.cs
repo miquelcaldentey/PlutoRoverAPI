@@ -19,26 +19,39 @@ public class MoveServiceLoggerDecorator : IMoveService
     {
         try
         {
-            _logger.LogInformation("Requested movements {Movements}", movements);
+            LogInformation(movements, "Requested movements {Movements}");
             
             var result = _inner.Move(movements);
 
-            var positionSerialized = Serialize(result);
-            _logger.LogInformation("Movements done, new position {Position}", positionSerialized);
+            LogInformation(result, "Movements done, new position {Position}");
 
             return result;
         }
         catch (Exception ex)
         {
-            _logger.LogError("Error for Requested movements {Movements}, {Error}", movements, ex.Message);
+            LogError("Error for Requested movements {Movements}, {Error}", movements, ex.Message);
             throw;
         }
+    }
 
-        
+    private void LogInformation(object request, string text)
+    {
+        var rqSerialized = Serialize(request);
+        //PubSub Log
+
+        _logger.LogInformation(text, rqSerialized);
+    }
+
+    private void LogError(string text, params object?[] args)
+    {
+        _logger.LogError(text, args);
     }
 
     private static string Serialize(object obj)
     {
-        return JsonConvert.SerializeObject(obj);
+        return 
+            obj is string 
+            ? (string)obj 
+            : JsonConvert.SerializeObject(obj);
     }
 }
