@@ -1,17 +1,17 @@
 ﻿using PlutoRoverAPI.Infrastructure.Decorators;
-using PlutoRoverAPI.Services.Move;
-using PlutoRoverAPI.Services.Move.Interfaces;
+using PlutoRoverAPI.Services.Movements;
+using PlutoRoverAPI.Services.Movements.Interfaces;
+using PlutoRoverAPI.Services.Positions.Interfaces;
 
-namespace PlutoRoverAPI.Startups
+namespace PlutoRoverAPI.Startups;
+
+public static class MoveStartupExtension
 {
-    public static class MoveStartupExtension
+    public static void AddMove(this IServiceCollection services)
     {
-        public static void AddMove(this IServiceCollection services)
-        {
-            services.AddScoped<IMoveService>(r =>
-                new MoveServiceLoggerDecorator(
-                    new MoveService()
-                    ));
-        }
+        services.AddSingleton<IMoveService>(r =>
+            new MoveServiceLoggerDecorator(
+                new MoveService(r.GetRequiredService<IPositionService>())
+                ));
     }
 }

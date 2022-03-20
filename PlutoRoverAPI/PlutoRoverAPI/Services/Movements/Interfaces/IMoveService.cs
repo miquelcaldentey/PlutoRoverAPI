@@ -1,6 +1,6 @@
 ﻿using PlutoRoverAPI.Models.Common;
 
-namespace PlutoRoverAPI.Services.Move.Interfaces;
+namespace PlutoRoverAPI.Services.Movements.Interfaces;
 
 public interface IMoveService
 {

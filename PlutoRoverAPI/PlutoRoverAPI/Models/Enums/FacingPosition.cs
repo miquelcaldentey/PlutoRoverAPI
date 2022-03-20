@@ -4,8 +4,8 @@ namespace PlutoRoverAPI.Models.Enums;
 
 public enum FacingPosition
 {
-    N,
-    S,
-    E,
-    W
+    N = 0,
+    E = 1,
+    S = 2,
+    W = 3,
 }

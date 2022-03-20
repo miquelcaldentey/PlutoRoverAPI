@@ -1,20 +1,19 @@
 ﻿using PlutoRoverAPI.Models.Common;
-using PlutoRoverAPI.Services.Move.Interfaces;
+using PlutoRoverAPI.Services.Movements.Interfaces;
 
-namespace PlutoRoverAPI.Infrastructure.Decorators
+namespace PlutoRoverAPI.Infrastructure.Decorators;
+
+public class MoveServiceLoggerDecorator : IMoveService
 {
-    public class MoveServiceLoggerDecorator : IMoveService
+    private readonly IMoveService _inner;
+    
+    public MoveServiceLoggerDecorator(IMoveService inner)
     {
-        private readonly IMoveService _inner;
-        
-        public MoveServiceLoggerDecorator(IMoveService inner)
-        {
-            this._inner = inner;
-        }
+        this._inner = inner;
+    }
 
-        public Position Move(string movements)
-        {
-            return _inner.Move(movements);
-        }
+    public Position Move(string movements)
+    {
+        return _inner.Move(movements);
     }
 }

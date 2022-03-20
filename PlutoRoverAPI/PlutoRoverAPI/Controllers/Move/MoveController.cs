@@ -1,11 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
-using PlutoRoverAPI.Services.Move.Interfaces;
+using PlutoRoverAPI.Infrastructure.Base;
+using PlutoRoverAPI.Services.Movements.Interfaces;
 
 namespace PlutoRoverAPI.Controllers.Move;
 
 [ApiController]
 [Route("api")]
-public class MoveController : ControllerBase
+public class MoveController : BaseController
 {
     private readonly IMoveService _moveService;
 
@@ -17,6 +18,6 @@ public class MoveController : ControllerBase
     [HttpPost("move")]
     public IActionResult Move(string movements)
     {
-        return Ok(_moveService.Move(movements));
+        return Execute(() => _moveService.Move(movements));
     }
 }
