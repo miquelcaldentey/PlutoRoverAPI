@@ -9,6 +9,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddMove();
+builder.Services.AddPosition();
 
 var app = builder.Build();
 

@@ -1,7 +1,6 @@
 ﻿using PlutoRoverAPI.Models.Common;
 using PlutoRoverAPI.Models.Enums;
 using PlutoRoverAPI.Services.Positions.Interfaces;
-using Common = PlutoRoverAPI.Models.Common;
 
 namespace PlutoRoverAPI.Services.Positions;
 
@@ -17,8 +16,8 @@ public class PositionService : IPositionService
     {
         return new Position
         {
-            X = _random.Next(20, 20),
-            Y = _random.Next(20, 20),
+            X = _random.Next(-20, 20),
+            Y = _random.Next(-20, 20),
             FacingPosition = (FacingPosition)_random.Next(0, 3)
         };        
     }

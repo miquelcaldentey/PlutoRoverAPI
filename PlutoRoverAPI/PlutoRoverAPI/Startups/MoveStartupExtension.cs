@@ -11,7 +11,8 @@ public static class MoveStartupExtension
     {
         services.AddSingleton<IMoveService>(r =>
             new MoveServiceLoggerDecorator(
-                new MoveService(r.GetRequiredService<IPositionService>())
-                ));
+                new MoveService(
+                    r.GetRequiredService<IPositionService>()),
+                r.GetRequiredService<ILogger<MoveServiceLoggerDecorator>>()));
     }
 }
