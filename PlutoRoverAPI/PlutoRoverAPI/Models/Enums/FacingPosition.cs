@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace PlutoRoverAPI.Models.Enums;
+﻿namespace PlutoRoverAPI.Models.Enums;
 
 public enum FacingPosition
 {
