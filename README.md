@@ -7,7 +7,7 @@ The structure I followed is a solution with one Aplication project and one Test 
 In the Application Project, I have separated the structure as follows
 - Controllers
 - Helpers
-- Infrastructure: Contains Base methods, Decorators and Exceptions
+- Infrastructure: Contains Base methods, Decorators, Pubsub and Exceptions
 - Models: The Common models could be extracted in a different project / Nuget, but for the simplicity of the test, I've let them here.
 - Services
 - Startups: Configuring service dependencies
